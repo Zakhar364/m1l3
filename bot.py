@@ -18,6 +18,11 @@ def ban_user(message):
         def echo_message(message):
             bot.reply_to(message, message.text) 
          # проверка пользователя
+        @bot.message_handler(content_types=['new_chat_members'])
+        def make_some(message):
+        bot.send_message(message.chat.id, 'I accepted a new user!')
+        bot.approve_chat_join_request(message.chat.id, message.from_user.id)
+        
         if user_status == 'administrator' or user_status == 'creator':
             bot.reply_to(message, "Невозможно забанить администратора.")
         else:
